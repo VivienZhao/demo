@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        canvas{
+            background:#000;
+        }
+    </style>
+    <script>
+        function ran(n,m){
+            return parseInt(Math.random()*(m-n)+n)
+        }
+
+        window.onload=function(){
+            var oC=document.querySelector('#can');
+            var gd=oC.getContext('2d');
+            var winW=document.documentElement.clientWidth;
+            var winH=document.documentElement.clientHeight;
+            oC.width=winW;
+            oC.height=winH;
+            var Len=15;//尾巴个数
+            var N=5;
+            var arr=[];
+            for(var i=0;i<N;i++){
+                arr[i]={
+                    x:ran(0,winW),
+                    y:ran(0,winH),
+                    iSpeedX:ran(-10,10),
+                    iSpeedY:ran(-10,10)
+                }
+            }
+            var pw=1;
+            var ph=1;
+            var oldArr=[];
+            function draw(json){
+                gd.fillStyle = '#fff';
+                gd.fillRect(json.x-pw/2,json.y-ph/2,pw,ph)
+            }
+            setInterval(function(){
+                gd.clearRect(0,0,oC.width,oC.height);
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i].x<=100){
+                        arr[i].x=100;
+                        arr[i].iSpeedX*=-1;
+                    }else if(arr[i].x>=oC.width-100){
+                        arr[i].x=oC.width-100;
+                        arr[i].iSpeedX*=-1;
+                    }
+                    if(arr[i].y<=100){
+                        arr[i].y=100;
+                        arr[i].iSpeedY*=-1;
+                    }else if(arr[i].y>=oC.height-100){
+                        arr[i].y=oC.height-100;
+                        arr[i].iSpeedY*=-1;
+                    }
+                    arr[i].x+=arr[i].iSpeedX;
+                    arr[i].y+=arr[i].iSpeedY;
+                    draw(arr[i]);
+                }
+                gd.beginPath();//重新开启画笔
+                gd.moveTo(arr[0].x,arr[0].y);//起始位置
+                for(var i=1;i<arr.length;i++){
+                    gd.lineTo(arr[i].x,arr[i].y)
+                }//路径
+                gd.closePath();//闭合路径
+                gd.strokeStyle = '#fff';
+                gd.stroke();//描边
+
+                //画拖影
+                var arr2=[];
+                for(var i=0;i<arr.length;i++){
+                    arr2[i]={
+                        x:arr[i].x,
+                        y:arr[i].y
+                    }
+                }
+                oldArr.push(arr2);//存上次的数据
+                if(oldArr.length>Len){
+                    oldArr.shift();
+                }//保证只有五条数据
+
+                for(var i=0;i<oldArr.length;i++){
+                    gd.beginPath();
+                    gd.moveTo(oldArr[i][0].x,oldArr[i][0].y);
+                    for(var j=1;j<oldArr[i].length;j++){
+                        gd.lineTo(oldArr[i][j].x,oldArr[i][j].y);
+                    }
+                    gd.closePath();
+                    gd.strokeStyle = '#fff';
+                    gd.stroke();
+                }
+            },20)
+
+
+
+        }
+    </script>
+</head>
+<body>
+<canvas  id="can"></canvas>
+</body>
+</html>
