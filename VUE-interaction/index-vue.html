@@ -1,0 +1,190 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>接口测试 </title>
+<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+<script src="vue.js"></script>
+<script src="vue-resource.js"></script>
+    <script>
+        window.onload=function(){
+
+            function toDub(n){
+                return n<10? '0'+n:''+n;
+            }
+
+            Vue.filter('time',function(input){
+                var oDate=new Date();
+                oDate.setTime(input);
+                return oDate.getFullYear()+'-'+(oDate.getMonth(input)+1)+'-'+oDate.getDate()+' '+toDub(oDate.getHours())+':'+toDub(oDate.getMinutes())+':'+toDub(oDate.getSeconds());
+            });
+
+            new Vue({
+                el:'#znsArea',
+                data:{
+                    msgList:[],
+                    content:'',
+                    pages:[]
+                },
+                methods:{
+                    //刷新頁面時獲取第一頁
+                    show:function(){
+                        this.$http.get('weibo.php?act=get&page=1').then(
+                                function(res){
+                                    this.msgList=res.data;
+                                },
+                                function(){
+                                    alert('获取失败')
+                                }
+                        )
+                    },
+
+                    //循环创建页数
+                    ShowPages:function(){
+                        this.$http.get('weibo.php?act=get_page_count').then(
+                                function(res){
+                                    for(var i=1;i<res.data.count;i++){
+                                        this.pages.push(i);
+                                    }
+                                },
+                                function(){
+                                    alert('創建頁碼失敗')
+                                }
+                        )
+                    },
+
+                    //点击某一页获取数据
+                    setPages:function(n){
+                        this.$http.get(`weibo.php?act=get&page=${n}`).then(
+                                function(res){
+                                    this.msgList=res.data;
+                                },
+                                function(){
+                                    alert('获取失败')
+                                }
+                        )
+                    },
+
+
+                    //添加一项留言
+                    addMsg:function(){
+                       var url=`weibo.php?act=add&content=${this.content}`;
+                       this.$http.get(url).then(
+                               function(res){
+                                   if(res.data.error){
+                                       alert('失败')
+                                   }else{
+                                       this.msgList.unshift({id:res.data.id,content:this.content,time:res.data.time,acc:0,ref:0});
+                                       this.content=''
+                                   }
+                               },
+                               function(){
+                                   alert('失败')
+                               }
+                       )
+                    },
+                    //顶某条数据
+                    accMsg:function(id){
+                        var url=`weibo.php?act=acc&id=${id}`
+                        this.$http.get(url).then(
+                                function(res){
+                                    if(res.data.error){
+                                        alert('顶失败了')
+                                    }else{
+                                        for(var i=0;i<this.msgList.length;i++){
+                                            if(this.msgList[i].id==id){
+                                                this.msgList[i].acc++
+                                            }
+                                        }
+                                    }
+                                },
+                                function(){
+                                    alert('顶失败了')
+                                }
+                        )
+                    },
+
+                    //踩某条数据
+                    refMsg:function(id){
+                        var url=`weibo.php?act=ref&id=${id}`
+                        this.$http.get(url).then(
+                                function(res){
+                                    if(res.data.error){
+                                        alert('踩失败了')
+                                    }else{
+                                        for(var i=0;i<this.msgList.length;i++){
+                                            if(this.msgList[i].id==id){
+                                                this.msgList[i].ref++
+                                            }
+                                        }
+                                    }
+                                },
+                                function(){
+                                    alert('踩失败了')
+                                }
+                        )
+                    },
+
+                    //删除某条数据
+                    delMsg:function(id){
+                        var url=`weibo.php?act=del&id=${id}`
+                        this.$http.get(url).then(
+                                function(res){
+                                    if(res.data.error){
+                                        alert('删除失败了')
+                                    }else{
+                                        for(var i=0;i<this.msgList.length;i++){
+                                            if(this.msgList[i].id==id){
+                                                this.msgList.splice(i,1)
+                                            }
+                                        }
+                                    }
+                                },
+                                function(){
+                                    alert('删除失败了')
+                                }
+                        )
+                    }
+                }
+
+            })
+        };
+    </script>
+</head>
+<body>
+<div class="znsArea" id="znsArea">
+    {{ShowPages()}}
+    {{show()}}
+
+<!--留言-->
+     <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="tijiaoText" v-model="content"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" class="inputs" value="" @click="addMsg()"/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+<!--已留-->
+    <div class="commentOn">
+        <div class="page" >
+            <a href="javascript:;" class="active" v-for="n in pages" @click="setPages(n)">{{n}}</a>
+        </div>
+        <div class="noContent" v-show="msgList.length<=0">暂无留言</div>
+        <div class="messList">
+        	<div class="reply" v-for="value in msgList">
+                <p class="replyContent">{{value.content}}</p>
+                <p class="operation">
+                    <span class="replyTime">{{value.time*1000| time }}</span>
+                    <span class="handle">
+                    	<a href="javascript:;" class="top" @click="accMsg(value.id)">{{value.acc}}</a>
+                        <a href="javascript:;" class="down_icon" @click="refMsg(value.id)">{{value.ref}}</a>
+                        <a href="javascript:;" class="cut" @click="delMsg(value.id)">删除</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
