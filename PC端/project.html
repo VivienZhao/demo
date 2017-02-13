@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="js/swiper-3.4.0.min.css">
+
+<style>
+    *{
+        margin:0;padding:0;
+    }
+    a{ text-decoration:none;}
+    img{ display:block;}
+    li{list-style:none;}
+    input{outline:none;}
+    .fl{ float:left;}
+    .fr{ float:right;}
+    .clearFix:after{ display:block; content:''; clear:both;}
+    .clearFix{zoom:1;}
+    li{
+        list-style: none;
+    }
+    body{
+        margin:0 auto;position:relative;
+    }
+    header{
+        height:60px;width:100%;background: url( images/header-bg.jpg) repeat-x;margin:0 auto;overflow: hidden;
+    }
+    header span{
+        float:left;background:url( images/index-phone.jpg) no-repeat;width:245px;height:20px;color:#f2893f;padding-left:25px;font-size:18px;
+    }
+    header div{
+        width:850px;float:right;margin-top:20px;
+    }
+    nav{
+        width:1920px;margin:0 auto;height:150px;overflow:hidden;
+    }
+    nav h1{
+        text-indent: -999em;background:url(images/index-logo.jpg) no-repeat;height:150px;width:600px;float:left;
+    }
+    nav ul{
+        width:1320px;height:150px;float:right;
+    }
+    nav ul li{
+        width:156px;height:150px;text-align: center;line-height: 150px;font-size:22px;color:#333;float:left;cursor:pointer;
+    }
+    .a1{
+        background:url( images/index-nav.jpg) no-repeat;color:#fff;
+    }
+    .index-banner{
+        position:relative;width:100%;height:720px;
+    }
+    .banner{
+        width:1920px;height:720px;position:absolute;left:50%;margin-left:-960px;
+    }
+    .banner{
+        background: #fff;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+    }
+    .index-list{
+        width:100%;background:#f6f6f6;height:460px;border-bottom:1px solid #ccc;
+    }
+    .index-list ul{
+        margin-top:-30px;position:relative;z-index: 3;overflow:hidden;width:1920px;margin:0 auto;
+    }
+    .index-list ul li{
+        width:400px;margin-left:60px;height:436px;background:#fff;float:left;
+    }
+    .index-list ul div{
+        width:400px;height:265px;
+    }
+    .index-list ul h6{
+        font-weight:bold;text-align: center;height:24px;line-height: 24px;font-size:24px;color:#444;margin-top:40px;
+    }
+    .index-list ul p{
+        text-align: center;height:16px;line-height: 16px;font-size:16px;color:#999;margin-top:24px;
+    }
+    .list-img1{
+        background:url( images/index-list1.jpg) no-repeat;
+    }
+    .index-list ul .list-img1-1{
+        background:url( images/index-list1-1.JPG) no-repeat;width:300px;margin:0 auto;border-bottom:1px solid #ccc;height:264px;
+    }
+    .list-img2{
+        background:url( images/index-list2.jpg) no-repeat;
+    }
+    .index-list ul .list-img2-2{
+        background:url( images/index-list2-2.JPG) no-repeat;width:300px;margin:0 auto;border-bottom:1px solid #ccc;height:264px;
+    }
+    .list-img3{
+        background:url( images/index-list3.jpg) no-repeat;
+    }
+    .index-list ul .list-img3-3{
+        background:url( images/index-list3-3.JPG) no-repeat;width:300px;margin:0 auto;border-bottom:1px solid #ccc;height:264px;
+    }
+    .list-img4{
+        background:url( images/index-list4.jpg) no-repeat;
+    }
+    .index-list ul .list-img4-4{
+        background:url( images/index-list4-4.JPG) no-repeat;width:300px;margin:0 auto;border-bottom:1px solid #ccc;height:264px;
+    }
+    .index-news{
+        width:1800px;margin:60px auto 0;height:505px;
+    }
+    .index-news h6{
+        width:400px;height:40px;background:#f9f9f9;font-size:28px;color:#004ea2;
+    }
+    .index-news h6 span{
+        font-size:26px;color:#aaa;margin-left:26px;text-align: center;line-height: 40px;
+    }
+    .index-newsT-r{
+        background:url( images/index-newsT-r.jpg) repeat-x;width:1400px;height:24px;margin-top:10px;
+    }
+    .index-news ul{
+        margin:70px -150px 0 0;width:1950px;
+    }
+    .index-news ul li{
+        width:825px; height:120px;border-bottom:1px dashed #d8d8d8;float:left;margin-right:150px;
+    }
+    .index-news ul li h5{
+        color:#666;font-size:20px;margin:35px 0 24px;cursor: pointer;
+    }
+    .index-news ul li p{
+        color:#999;font-size:16px;cursor: pointer;
+    }
+    .index-news .index-cases{
+        height:605px;margin:40px 0 0 0;width:1800px;overflow:hidden;
+    }
+    .index-news .index-cases li{
+        width:570px;height:605px;margin:0 0 0 30px;border:none;
+    }
+    .index-news .index-cases li h6{
+        background:#fff;
+    }
+    .index-news .index-cases li div{
+        width:570px;height:350px;margin-bottom:30px;
+    }
+    .index-news .index-cases li h6{
+        margin-bottom:18px;font-size:20px;color:#000;
+    }
+    .index-news .index-cases li p{
+        line-height:30px;
+    }
+    .index-news .cases{
+        background:#fff;
+    }
+    .index-part{
+        margin-top:150px;height:260px;
+    }
+    .index-part .index-part-bottom{
+        margin:40px 0 0 0 ;
+    }
+    .index-part .index-part-bottom li{
+        width:188px;height:105px;border:1px solid #ccc;margin:0 0 0 30px;
+    }
+    footer{
+        width:100%;height:702px;background:url(images/footer-bg.jpg) repeat-x;
+    }
+    footer .index-footer-top{
+        width:1800px;height:435px;margin:0 auto;
+    }
+    footer .index-footer-top li{
+        width:305px;height:260px;margin-top:60px;
+    }
+    footer .index-footer-top li h6{
+        font-size:25px;color:#000;margin-bottom:60px;
+    }
+    footer .index-footer-top li p{
+        font-size:16px;color:#333333;margin-bottom:34px;
+    }
+    footer .index-footer-content{
+        width:1800px;height:115px;margin:0 auto;padding-top:55px;font-size:16px; color:#999;
+    }
+    footer .index-footer-content a{
+        margin-left:25px;font-size:16px; color:#999;
+    }
+    footer .index-footer-content a:hover{
+        color:#02d1fb;text-decoration:underline;
+    }
+    footer .index-footer-bottom{
+        width:100%;height:100px;background:url(images/footer-bg1.jpg) repeat-x;
+    }
+    footer .index-footer-bottom div{
+        width:1420px;margin:0 auto;padding-top:40px;color:#666;font-size:16px;
+    }
+    .index-list ul .toblue{
+        color:#05499e;
+    }
+    .index-footer-contact{
+        width:335px;margin-right:175px;
+    }
+</style>
+<script src="js/vue.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        new Vue({
+            el:'#box',
+            data:{
+                nav:['网站首页','关于我们','成功案例','服务支持','解决方案','通知通告','营改增专区','联系我们'],
+                navC:'a1',
+                m:0,
+                list:[{"listimg":"list-img1","listtop":"金税业务","listbottom":"防伪税控、网上认证、远程报税"},{"listimg":"list-img2","listtop":"物联网金融","listbottom":"智慧农业、（POS、微信）支付、借贷平台"},{"listimg":"list-img3","listtop":"财税业务","listbottom":"A3、A6、A8、爱信诺税控接口"},{"listimg":"list-img4","listtop":"培训业务","listbottom":"财务常规课程、考试认证课程、模拟实训"}],
+                news:[{"newstop":"金品团注册流程","newsbottom":"金品团注册流程..."},{"newstop":"*6月3号最新版税控开票软件、视频、手册下载*","newsbottom":"6月3号最新版软件、视频、手册下载..."},{"newstop":"营改增新增行业最新政策解析与实务操作","newsbottom":"营改增新增行业最新政策解析与实务操作..."},{"newstop":"在线培训视频","newsbottom":"税控发票开票软件（金税盘版）V2.0 (完整版)..."},{"newstop":"黑龙江金穗科技有限公司企业QQ报修通道","newsbottom":"黑龙江金穗科技有限公司企业QQ报修通道..."},{"newstop":"新用户常见问题解答","newsbottom":"新用户常见问题解答..."},],
+                cases:[{"casestop":"index-cases-img1","casescenter":"金品团","casesbottom":"2016年6月1日由黑龙江金穗科技有限公司自主研发的团购平台-金品团正式上线。金品团以打造龙江自有团购平台为目标，具有区域特..."},{"casestop":"index-cases-img2","casescenter":"Aisino ERP A6","casesbottom":"Aisino ERP.A6是专为成长型中小企业提供的企业级管理软件。..."},{"casestop":"index-cases-img3","casescenter":"税控发票开票软件","casesbottom":"“增值税防伪税控系统”运用先进的安全密码算法加解密技术和电子黑匣子存储技术，提供了完善的增值税防伪和税控的解决方案..."}],
+                part:[1,2,3,4,5,6,7,8],
+                listclass:'toblue',
+                listMath:-1
+            },
+            methods:{
+                navClass:function(index){
+                    this.m=index;
+                },
+                toImg:function(index){
+                    this.list[index].listimg='list-img'+(index+1)+'-'+(index+1);
+                    this.listMath=index;
+                },
+                toPro:function(index){
+                    this.list[index].listimg='list-img'+(index+1)+'';
+                    this.listMath='-1';
+                }
+            }
+        });
+    }, false)
+</script>
+</head>
+<body>
+    <div id="box">
+        <header>
+            <div>
+                <span>服务热线:400-114-9567</span>
+                <span>服务监督:0451:84896707</span>
+                <span>全国服务监督:400-810-6116</span>
+            </div>
+        </header>
+        <nav>
+            <h1>黑龙江金穗科技有限公司</h1>
+            <ul>
+                <li v-for="value in nav" class="{{$index==m?navC:''}}" @click="navClass($index)">{{value}}</li>
+            </ul>
+        </nav>
+        <div class="index-banner">
+            <div class="banner">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" style="background-image:url( images/index-banner.jpg)"></div>
+                        <div class="swiper-slide" style="background-image:url( images/index-banner1.jpg)"></div>
+                        <div class="swiper-slide" style="background-image:url( images/index-banner2.jpg)"></div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination swiper-pagination-white"></div>
+                </div>
+            </div>
+        </div>
+        <div class="index-list">
+            <ul>
+                <li class="" v-for="listContent in list" @mouseover="toImg($index)" @mouseout="toPro($index)">
+                    <div class="{{listContent.listimg}}"></div>
+                    <h6 class="{{$index==listMath?listclass:'';}}">{{listContent.listtop}}</h6>
+                    <p class="{{$index==listMath?listclass:'';}}">{{listContent.listbottom}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="index-news">
+            <div class="clearFix index-news-content">
+                <h6 class="fl">通知公告<span>NEWS</span></h6>
+                <div class="index-newsT-r fr"></div>
+            </div>
+            <ul class="clearFix">
+                <li v-for="newsContent in news">
+                    <h5>{{newsContent.newstop}}</h5>
+                    <p>{{newsContent.newsbottom}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="index-news">
+            <div class="clearFix">
+                <h6 class="fl cases">经典案例<span>CLASSIC CASES</span></h6>
+                <div class="index-newsT-r fl"></div>
+            </div>
+            <ul class="index-cases clearFix">
+                <li class="fl" v-for="casescontent in cases">
+                    <div><img src="images/{{casescontent.casestop}}.jpg" alt=""></div>
+                    <h6>{{casescontent.casescenter}}</h6>
+                    <p>{{casescontent.casesbottom}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="index-news index-part">
+            <div class="clearFix">
+                <h6 class="fl cases">合作伙伴<span>PARTNERS</span></h6>
+                <div class="index-newsT-r fl"></div>
+            </div>
+            <ul class="clearFix index-part-bottom">
+                <li class="fl" v-for="partcontent in part"><img src="images/index-part-img{{partcontent}}.jpg" alt=""></li>
+            </ul>
+        </div>
+        <footer>
+            <ul class="index-footer-top clearFix">
+                <li class="fl">
+                    <h6>关于我们</h6>
+                    <p>公司概况</p>
+                    <p>企业文化</p>
+                    <p>企业资质</p>
+                    <p>加入我们</p>
+                </li>
+                <li class="fl">
+                    <h6>成功案例</h6>
+                    <p>最近案例</p>
+                </li>
+                <li class="fl">
+                    <h6>服务支持</h6>
+                    <p>服务项目</p>
+                    <p>合作流程</p>
+                    <p>服务范围</p>
+                    <p>满意度调查</p>
+                </li>
+                <li class="fl index-footer-contact">
+                    <h6>联系我们</h6>
+                    <p><img src="" alt="">官方微博: @黑龙江金穗科技有限公司</p>
+                    <p><img src="" alt="">咨询邮箱：sinohljjs@163.com</p>
+                    <p><img src="" alt="">咨询热线：400-114-9567</p>
+                    <p><img src="" alt="">微信：hljjs01</p>
+                </li>
+                <li class="fl">
+                    <h6>在线服务</h6>
+                    <div>
+                        <img src="images/index-footer-img.jpg" alt="">
+                    </div>
+                </li>
+            </ul>
+            <div class="index-footer-content">
+                <div>
+                    友情链接 :<a href="javascript:;">快递查询</a><a href="javascript:;">航天信息</a><a href="javascript:;">中国航天科工集团</a>
+                </div>
+            </div>
+            <div class="index-footer-bottom">
+                <div>Copyright © 2014 www.hljjs.com.cn All Right Reserved.黑龙江金穗科技有限公司 版权所有   地址：香坊区和平路79号   咨询热线：400-114-9567   备案号：黑B2-20150058</div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="js/swiper-3.4.0.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        spaceBetween: 30,
+        effect: 'fade'
+    });
+    </script>
+</body>
+</html>
